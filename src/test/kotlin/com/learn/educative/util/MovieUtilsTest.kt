@@ -5,7 +5,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class ValidationUtilsTest : FunSpec({
+class MovieUtilsTest : FunSpec({
 
 
    test("findLetterFrequency") {
@@ -20,10 +20,10 @@ class ValidationUtilsTest : FunSpec({
                'U' to 2, 'V' to 1, 'W' to 1, 'X' to 1, 'Y' to 1, 'Z' to 1
                )
            ),
-        ) { word, frequencyMap -> ValidationUtils.findLetterFrequency(word) shouldBe frequencyMap }
+        ) { word, frequencyMap -> MovieUtils.findLetterFrequency(word) shouldBe frequencyMap }
     }
 
-    test("foundSimilarTitles") {
+    test("retrieveSimilarTitles") {
         val letterFreqMap = mapOf(mapOf('A' to 1, 'E' to 2, 'R' to 1, 'S' to 1, 'T' to 1) to listOf(
             "easter", "eaters", "seater", "teaser"))
         forAll(
@@ -31,6 +31,6 @@ class ValidationUtilsTest : FunSpec({
            row("easter", 4),
            row("eATErs", 4),
            row("easer", 0)
-        ) { word, count -> ValidationUtils.foundSimilarTitles(word, letterFreqMap).size shouldBe count }
+        ) { word, count -> MovieUtils.retrieveSimilarTitles(word, letterFreqMap).size shouldBe count }
     }
 })
