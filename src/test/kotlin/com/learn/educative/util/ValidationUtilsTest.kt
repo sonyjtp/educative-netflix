@@ -23,5 +23,14 @@ class ValidationUtilsTest : FunSpec({
         ) { word, frequencyMap -> ValidationUtils.findLetterFrequency(word) shouldBe frequencyMap }
     }
 
-    test("foundSimilarTitles") { }
+    test("foundSimilarTitles") {
+        val letterFreqMap = mapOf(mapOf('A' to 1, 'E' to 2, 'R' to 1, 'S' to 1, 'T' to 1) to listOf(
+            "easter", "eaters", "seater", "teaser"))
+        forAll(
+           row("aretes", 4),
+           row("easter", 4),
+           row("eATErs", 4),
+           row("easer", 0)
+        ) { word, count -> ValidationUtils.foundSimilarTitles(word, letterFreqMap).size shouldBe count }
+    }
 })

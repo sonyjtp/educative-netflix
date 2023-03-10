@@ -10,7 +10,7 @@ object ValidationUtils {
         return letterFrequency
     }
 
-    fun foundSimilarTitles(input: String,
-                           letterFrequencyTitleMap: Map<Map<Char, Int>,
-                                   List<String>>): List<String>?  = letterFrequencyTitleMap[findLetterFrequency(input)]
+    fun foundSimilarTitles(
+        input: String, letterFrequencyTitleMap: Map<Map<Char, Int>, List<String>>
+    ): List<String>  = letterFrequencyTitleMap[findLetterFrequency(input)] ?: listOf()
 }
