@@ -1,6 +1,6 @@
 package com.learn.educative.util
 
-import com.learn.educative.internal.LinkedListNode
+import com.learn.educative.helper.LinkedListNode
 
 internal object MovieUtils {
 
@@ -26,7 +26,7 @@ internal object MovieUtils {
     private fun sortMoviesByRank(movie1: LinkedListNode?, movie2: LinkedListNode?): LinkedListNode? {
         var left = movie1
         var right = movie2
-        var dummy = LinkedListNode(data = -1)
+        val dummy = LinkedListNode(data = -1)
         var prev: LinkedListNode? = dummy
         while (left != null && right != null) {
             if (left.data <= right.data) {
@@ -43,7 +43,7 @@ internal object MovieUtils {
 
     }
 
-    fun mergeAllMovieListsByRank(movieList: List<LinkedListNode>): LinkedListNode? {
+    fun findHighestRankedMovie(movieList: List<LinkedListNode>): LinkedListNode? {
         if (movieList.isNotEmpty()) {
             var result: LinkedListNode? = movieList[0]
             for (i in 1 until movieList.size)  {

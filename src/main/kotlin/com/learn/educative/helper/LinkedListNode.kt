@@ -1,4 +1,4 @@
-package com.learn.educative.internal
+package com.learn.educative.helper
 
 internal data class LinkedListNode(
     var key:Int = 0,

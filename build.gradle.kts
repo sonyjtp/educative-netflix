@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "1.8.0"
     id("io.kotest.multiplatform") version "5.5.5"
     application
+    jacoco
 }
 
 val kotestVersion: String by project
@@ -25,10 +26,38 @@ dependencies {
 
 tasks.test.configure {
     useJUnitPlatform()
+    excludes.add("com.learn.educative.*")
+    finalizedBy(tasks.jacocoTestReport, tasks.jacocoTestCoverageVerification)
+}
+
+tasks.jacocoTestReport {
+    classDirectories.from(sourceSets.main.get().output.asFileTree.matching {
+    })
+
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = BigDecimal("0.80")
+            }
+        }
+        rule {
+            isEnabled = false
+            element = "CLASS"
+            includes = listOf("org.gradle.*", "default.*")
+            limit {
+                counter = "LINE"
+                value = "TOTALCOUNT"
+                maximum = BigDecimal("0.3")
+            }
+        }
+    }
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(19)
 }
 
 application {

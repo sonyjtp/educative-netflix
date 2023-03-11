@@ -1,5 +1,6 @@
 package com.learn.educative.util
 
+import com.learn.educative.testdata.MovieData
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -32,5 +33,25 @@ class MovieUtilsTest : FunSpec({
            row("eATErs", 4),
            row("easer", 0)
         ) { word, count -> MovieUtils.retrieveSimilarTitles(word, letterFreqMap).size shouldBe count }
+    }
+
+    test("findHighestRankedMovie") {
+        val movieLists = MovieData.createLinkLisNodes(
+            listOf(
+                listOf(3, 7, 9),
+                listOf(2,3,5,8, 11),
+                listOf(1),
+                listOf(10),
+                listOf(1,5,9,10)
+                )
+        )
+        val nodes = mutableListOf<Int>()
+        var nextNode = MovieUtils.findHighestRankedMovie(movieLists)?.next
+        while (nextNode != null) {
+            nodes.add(nextNode!!.data)
+            nextNode = nextNode?.next
+        }
+        nodes.joinToString("") shouldBe "1233557899101011"
+
     }
 })
