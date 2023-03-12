@@ -10,4 +10,5 @@ object MovieData {
     private fun createLinkedListNodes(dataList: List<Int>): List<LinkedListNode>  = dataList.map {
         LinkedListNode(data = it)
     }.toList()
+
 }

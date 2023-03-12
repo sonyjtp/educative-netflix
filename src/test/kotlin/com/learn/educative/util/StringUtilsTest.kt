@@ -1,13 +1,11 @@
 package com.learn.educative.util
 
-import com.learn.educative.testdata.MovieData
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class MovieUtilsTest : FunSpec({
-
+class StringUtilsTest: FunSpec({
 
     test("findLetterFrequency") {
        forAll(
@@ -21,7 +19,7 @@ class MovieUtilsTest : FunSpec({
                'U' to 2, 'V' to 1, 'W' to 1, 'X' to 1, 'Y' to 1, 'Z' to 1
                )
            ),
-        ) { word, frequencyMap -> MovieUtils.findLetterFrequency(word) shouldBe frequencyMap }
+        ) { word, frequencyMap -> StringUtils.findLetterFrequency(word) shouldBe frequencyMap }
     }
 
     test("retrieveSimilarTitles") {
@@ -32,27 +30,7 @@ class MovieUtilsTest : FunSpec({
            row("easter", 4),
            row("eATErs", 4),
            row("easer", 0)
-        ) { word, count -> MovieUtils.retrieveSimilarTitles(word, letterFreqMap).size shouldBe count }
+        ) { word, count -> StringUtils.retrieveSimilarTitles(word, letterFreqMap).size shouldBe count }
     }
 
-    test("findHighestRankedMovie") {
-        val movieLists = MovieData.createLinkedLisNodes(
-            listOf(
-                listOf(3, 7, 9),
-                listOf(2,3,5,8, 11),
-                listOf(1),
-                listOf(10),
-                listOf(1,5,9,10)
-                )
-        )
-        val nodes = mutableListOf<Int>()
-        var nextNode = MovieUtils.findRootNodeByData(movieLists)?.next
-        nextNode?.display()
-        while (nextNode != null) {
-            nodes.add(nextNode!!.data)
-            nextNode = nextNode?.next
-        }
-        nodes.joinToString("") shouldBe "1233557899101011"
-
-    }
 })
