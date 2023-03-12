@@ -1,3 +1,2 @@
-
 rootProject.name = "educative-netflix"
 

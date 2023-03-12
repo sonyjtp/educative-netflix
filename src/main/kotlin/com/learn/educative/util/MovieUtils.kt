@@ -4,9 +4,16 @@ import com.learn.educative.helper.LinkedListNode
 
 internal object MovieUtils {
 
-    fun findLetterFrequency(word: String): MutableMap<Char, Int> {
+    /**
+     * Creates a map of characters in a search string to the number of occurrences of each character
+     *
+     * @param searchString The search string
+     *
+     * @return MutableMap<Char, Int> Map of characters to their frequency in the searchString
+     */
+    fun findLetterFrequency(searchString: String): MutableMap<Char, Int> {
         val letterFrequency = mutableMapOf<Char, Int>()
-        val charArr = word.uppercase().replace(" ", "").toCharArray()
+        val charArr = searchString.uppercase().replace(" ", "").toCharArray()
         charArr.map {
             letterFrequency.put(it, letterFrequency.getOrElse(it) { 0 } + 1)
         }
@@ -15,19 +22,21 @@ internal object MovieUtils {
 
     /**
      * Retrieves a list of movies that have the same alphabets and the same number used in the searchString
+     *
      * @param searchString The title searched for
      * @param letterFrequencyTitleMap a map of existing movies' letter frequencies
+     *
      * @return a list of matches
      */
     fun retrieveSimilarTitles(
         searchString: String, letterFrequencyTitleMap: Map<Map<Char, Int>, List<String>>
     ): List<String>  = letterFrequencyTitleMap[findLetterFrequency(searchString)] ?: listOf()
 
-    private fun sortMoviesByRank(movie1: LinkedListNode?, movie2: LinkedListNode?): LinkedListNode? {
-        var left = movie1
-        var right = movie2
-        val dummy = LinkedListNode(data = -1)
-        var prev: LinkedListNode? = dummy
+    private fun findRootNodeByData(node1: LinkedListNode?, node2: LinkedListNode?): LinkedListNode? {
+        var left = node1
+        var right = node2
+        val temp = LinkedListNode(data = -1)
+        var prev: LinkedListNode? = temp
         while (left != null && right != null) {
             if (left.data <= right.data) {
                 prev!!.next = left
@@ -39,15 +48,15 @@ internal object MovieUtils {
             prev = prev.next
         }
         if (left == null) prev!!.next = right else prev!!.next = left
-        return dummy.next
+        return temp.next
 
     }
 
-    fun findHighestRankedMovie(movieList: List<LinkedListNode>): LinkedListNode? {
-        if (movieList.isNotEmpty()) {
-            var result: LinkedListNode? = movieList[0]
-            for (i in 1 until movieList.size)  {
-                result = sortMoviesByRank(result, movieList[i])
+    fun findRootNodeByData(nodeList: List<LinkedListNode>): LinkedListNode? {
+        if (nodeList.isNotEmpty()) {
+            var result: LinkedListNode? = nodeList[0]
+            for (i in 1 until nodeList.size)  {
+                result = findRootNodeByData(result, nodeList[i])
             }
             return result
         }

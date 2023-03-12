@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 class MovieUtilsTest : FunSpec({
 
 
-   test("findLetterFrequency") {
+    test("findLetterFrequency") {
        forAll(
            row("abC", mutableMapOf('A' to 1, 'B' to 1, 'C' to 1)),
            row("aabC", mutableMapOf('A' to 2, 'B' to 1, 'C' to 1)),
@@ -36,7 +36,7 @@ class MovieUtilsTest : FunSpec({
     }
 
     test("findHighestRankedMovie") {
-        val movieLists = MovieData.createLinkLisNodes(
+        val movieLists = MovieData.createLinkedLisNodes(
             listOf(
                 listOf(3, 7, 9),
                 listOf(2,3,5,8, 11),
@@ -46,7 +46,8 @@ class MovieUtilsTest : FunSpec({
                 )
         )
         val nodes = mutableListOf<Int>()
-        var nextNode = MovieUtils.findHighestRankedMovie(movieLists)?.next
+        var nextNode = MovieUtils.findRootNodeByData(movieLists)?.next
+        nextNode?.display()
         while (nextNode != null) {
             nodes.add(nextNode!!.data)
             nextNode = nextNode?.next
