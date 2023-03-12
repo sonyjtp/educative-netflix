@@ -1,11 +1,12 @@
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.10"
     id("io.kotest.multiplatform") version "5.5.5"
     application
     jacoco
 }
 
 val kotestVersion: String by project
+val kotlinVersion: String by project
 
 group = "com.learn.educative"
 version = "1.0-SNAPSHOT"
@@ -16,7 +17,10 @@ repositories {
 }
 
 dependencies {
-//    testImplementation(kotlin("test"))
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
+
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.kotest:kotest-property:$kotestVersion")
@@ -57,7 +61,7 @@ tasks.jacocoTestCoverageVerification {
 }
 
 kotlin {
-    jvmToolchain(19)
+    jvmToolchain(18)
 }
 
 application {
