@@ -30,34 +30,31 @@ dependencies {
 
 tasks.test.configure {
     useJUnitPlatform()
-    excludes.add("com.learn.educative.*")
     finalizedBy(tasks.jacocoTestReport, tasks.jacocoTestCoverageVerification)
 }
 
-tasks.jacocoTestReport {
-    classDirectories.from(sourceSets.main.get().output.asFileTree.matching {
-    })
-
-}
+tasks.jacocoTestReport { setJacocoClasses(classDirectories) }
 
 tasks.jacocoTestCoverageVerification {
+    setJacocoClasses(classDirectories)
     violationRules {
         rule {
             limit {
                 minimum = BigDecimal("0.80")
             }
         }
-        rule {
-            isEnabled = false
-            element = "CLASS"
-            includes = listOf("org.gradle.*", "default.*")
-            limit {
-                counter = "LINE"
-                value = "TOTALCOUNT"
-                maximum = BigDecimal("0.3")
-            }
-        }
     }
+}
+
+fun setJacocoClasses(classDirectories: ConfigurableFileCollection) {
+    val jacocoExcludes = listOf(
+        "**/com/learn/educative/dataclass/**",
+        "**/com/learn/educative/Main*"
+    )
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude(jacocoExcludes)
+    })
 }
 
 kotlin {
