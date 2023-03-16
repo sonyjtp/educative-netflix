@@ -1,6 +1,6 @@
 package com.learn.educative.testdata
 
-import com.learn.educative.helper.LinkedListNode
+import com.learn.educative.datastructures.LinkedListNode
 
 object MovieData {
 
