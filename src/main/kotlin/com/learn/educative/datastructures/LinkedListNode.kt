@@ -1,13 +1,14 @@
-package com.learn.educative.helper
+package com.learn.educative.datastructures
 import mu.KotlinLogging
 
 internal data class LinkedListNode(
     var key:Int = 0,
     var data:Int,
     var next: LinkedListNode? = null,
-    var arbitraryPointer: LinkedListNode? = null) {
-
-    private val logger = KotlinLogging.logger {}
+    var prev: LinkedListNode? = null) {
+    companion object {
+        private val logger = KotlinLogging.logger {}
+    }
 
     fun display(head: LinkedListNode? = this) {
         var temp = head
@@ -16,6 +17,10 @@ internal data class LinkedListNode(
             logger.info("Node data: ${temp.data}")
             temp = temp.next
         }
+    }
+
+    override fun toString(): String {
+        return "LLNode(key:$key, data:$data, next:${next?.key}, prev:${prev?.key})"
     }
 }
 

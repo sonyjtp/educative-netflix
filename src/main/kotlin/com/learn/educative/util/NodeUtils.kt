@@ -1,6 +1,6 @@
 package com.learn.educative.util
 
-import com.learn.educative.helper.LinkedListNode
+import com.learn.educative.datastructures.LinkedListNode
 
 internal object NodeUtils {
 

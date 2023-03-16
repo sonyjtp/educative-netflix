@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 class NodeUtilsTest : FunSpec({
 
 
-    test("findHighestRankedMovie") {
+    test("findRootNodeByData") {
         val movieLists = MovieData.createLinkedLisNodes(
             listOf(
                 listOf(3, 7, 9),

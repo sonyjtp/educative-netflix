@@ -1,11 +1,11 @@
-package com.learn.educative.helper
+package com.learn.educative.datastructures
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
-class MedianAgeTest : FunSpec({
+class IntPriorityQueueTest : FunSpec({
     test("insert") {
-        val medianAge = MedianAge()
+        val medianAge = IntPriorityQueue()
         medianAge.insert(22)
         medianAge.insert(35)
         medianAge.findMedian() shouldBe 28.5
