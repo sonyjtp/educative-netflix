@@ -10,19 +10,35 @@ internal data class DoublyLinkedList(
         head?.apply {
             node.next = this
             this.prev = node
-        }?:run {
-            tail = node
-        }
+        }?:run { tail = node }
         head = node
         size ++
     }
 
-    fun insertAtTail(key: Int, data: Int) {
-        val node = LinkedListNode(key, data)
+    fun append(node: LinkedListNode) { // to tail
+        node.next = null
+        node.prev = null
+        if (head == node) {
+            head = node
+        } else {
+            tail?.next = node
+            node.prev = tail
+        }
+        tail = node
+    }
+
+    /**
+     * Inserts a `LinkedListNode` to the end of the datastructure
+     *
+     * @param key Key of the node
+     * @param value Value of the node
+     */
+    fun insertAtTail(key: Int, value: Int) {
+        val node = LinkedListNode(key, value)
         tail?.apply {
             node.prev = this
             this.next = node
-        }?:run {
+        }?:run { // if a tail doesn't exist this node is the only element in the datastructure
             head = node
             node.prev = null
         }
@@ -31,28 +47,38 @@ internal data class DoublyLinkedList(
         size ++
     }
 
-    fun removeNode(node: LinkedListNode?): LinkedListNode? {
-        return node?.let {
-            it.prev?.let { prev -> prev.next = it.next }
-            it.next?.let { next -> next.prev = it.prev }
-            if (it == head) head = head!!.next
-            if (it == tail) tail = tail!!.prev
+    /**
+     * Removes node from the chain of nodes and rearranges it.
+     *
+     * @param node The node to be removed.
+     *
+     * @return the removed node
+     */
+    fun remove(node: LinkedListNode?): LinkedListNode? {
+        node?.let {
+            it.prev?.let { prev -> prev.next = it.next } ?: run { head = node.next }
+            it.next?.let { next -> next.prev = it.prev } ?: run { tail = node.prev }
+            if (it == head) head = it.next
+            if (it == tail) tail = it.prev
             size --
-            it
         }
+        return node
     }
 
     fun removeNodeByData(data: Int) {
         var node = head
         while (node != null) {
-            if (node.data == data) removeNode(node)
+            if (node.value == data) remove(node)
             node = node.next
         }
     }
 
-    fun removeHead() = removeNode(head)
+    /**
+     * Removes the head
+     */
+    fun removeHead(): LinkedListNode? = remove(head)
 
-    fun removeTail() = removeNode(tail)
+    fun removeTail() = remove(tail)
     override fun toString(): String {
         return "DLL(head:$head, tail:$tail, size:$size)"
     }
