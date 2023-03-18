@@ -15,15 +15,22 @@ internal data class DoublyLinkedList(
         size ++
     }
 
-    fun append(node: LinkedListNode) { // to tail
+    /**
+     * Appends a node to the tail of the `DoublyLinkedList`. Additionally, if the DLL doesn't have a head, add it as the
+     *  head as well.
+     *
+     * @param node The `LinkedListNode` to be added
+     */
+    fun append(node: LinkedListNode) {
         node.next = null
         node.prev = null
-        if (head == node) {
+        if (head == null) {
             head = node
         } else {
             tail?.next = node
             node.prev = tail
         }
+        size ++
         tail = node
     }
 
@@ -48,7 +55,11 @@ internal data class DoublyLinkedList(
     }
 
     /**
-     * Removes node from the chain of nodes and rearranges it.
+     * Removes node from the chain of nodes and rearranges it. When removing the node:
+     *  Set `next` of the previous node to the node's `next`
+     *  Set `prev` of the next node to the node's `prev`
+     *  Decrease the size of the DLL by one.
+     *  Clear `next` and `prev` of the node
      *
      * @param node The node to be removed.
      *
@@ -61,7 +72,10 @@ internal data class DoublyLinkedList(
             if (it == head) head = it.next
             if (it == tail) tail = it.prev
             size --
+            node.next = null
+            node.prev = null
         }
+
         return node
     }
 
