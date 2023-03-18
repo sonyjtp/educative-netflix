@@ -3,7 +3,8 @@ import mu.KotlinLogging
 
 internal data class LinkedListNode(
     var key:Int = 0,
-    var data:Int,
+    var value:Int,
+    var frequency: Int = 0,
     var next: LinkedListNode? = null,
     var prev: LinkedListNode? = null) {
     companion object {
@@ -12,15 +13,15 @@ internal data class LinkedListNode(
 
     fun display(head: LinkedListNode? = this) {
         var temp = head
-        logger.debug { "LinkedList chain starting at node ${temp?.data}: " }
+        logger.debug { "LinkedList chain starting at node ${temp?.value}: " }
         while (temp != null) {
-            logger.info("Node data: ${temp.data}")
+            logger.info("Node data: ${temp.value}")
             temp = temp.next
         }
     }
 
     override fun toString(): String {
-        return "LLNode(key:$key, data:$data, next:${next?.key}, prev:${prev?.key})"
+        return "LLNode(key:$key, value:$value, frequency:$frequency, prev:${prev?.key}, next:${next?.key})"
     }
 }
 

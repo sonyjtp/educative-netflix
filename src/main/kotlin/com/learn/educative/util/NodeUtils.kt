@@ -7,10 +7,10 @@ internal object NodeUtils {
     private fun findRootNodeByData(node1: LinkedListNode?, node2: LinkedListNode?): LinkedListNode? {
         var left = node1
         var right = node2
-        val temp = LinkedListNode(data = -1)
+        val temp = LinkedListNode(value = -1)
         var prev: LinkedListNode? = temp
         while (left != null && right != null) {
-            if (left.data <= right.data) {
+            if (left.value <= right.value) {
                 prev!!.next = left
                 left = left.next
             } else {
@@ -32,6 +32,6 @@ internal object NodeUtils {
             }
             return result
         }
-        return  LinkedListNode(data =  -1)
+        return  LinkedListNode(value =  -1)
     }
 }

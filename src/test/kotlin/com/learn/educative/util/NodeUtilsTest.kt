@@ -21,10 +21,9 @@ class NodeUtilsTest : FunSpec({
         var nextNode = NodeUtils.findRootNodeByData(movieLists)?.next
         nextNode?.display()
         while (nextNode != null) {
-            nodes.add(nextNode!!.data)
+            nodes.add(nextNode!!.value)
             nextNode = nextNode?.next
         }
         nodes.joinToString("") shouldBe "1233557899101011"
-
     }
 })

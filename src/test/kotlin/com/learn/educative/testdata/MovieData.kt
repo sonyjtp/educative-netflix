@@ -8,7 +8,7 @@ object MovieData {
         createLinkedListNodes(it)
     }.flatten()
     private fun createLinkedListNodes(dataList: List<Int>): List<LinkedListNode>  = dataList.map {
-        LinkedListNode(data = it)
+        LinkedListNode(value = it)
     }.toList()
 
 }
