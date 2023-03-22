@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+            <Bug pattern = "EI_EXPOSE_REP" />
+    </Match>
+    <Match>
+            <Bug pattern = "EI_EXPOSE_REP2" />
+    </Match>
+    <Match>
+            <Bug pattern = "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" />
+    </Match>
+    <Match>
+        <Class name="com.learn.educative.util.StringUtils" />
+        <Method name="findLetterFrequency" />
+        <Or>
+            <Bug pattern="BC_BAD_CAST_TO_ABSTRACT_COLLECTION" />
+            <Bug pattern="UC_USELESS_OBJECT" />
+        </Or>
+    </Match>
+</FindBugsFilter>
+

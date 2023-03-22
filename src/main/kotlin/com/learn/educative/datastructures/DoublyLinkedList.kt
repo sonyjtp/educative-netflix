@@ -1,6 +1,6 @@
 package com.learn.educative.datastructures
 
-internal data class DoublyLinkedList(
+internal class DoublyLinkedList(
     var head: LinkedListNode? = null,
     var tail: LinkedListNode? = null,
     var size: Int = 0

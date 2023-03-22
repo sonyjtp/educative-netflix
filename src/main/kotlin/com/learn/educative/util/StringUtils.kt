@@ -10,8 +10,7 @@ object StringUtils {
      */
     fun findLetterFrequency(searchString: String): MutableMap<Char, Int> {
         val letterFrequency = mutableMapOf<Char, Int>()
-        val charArr = searchString.uppercase().replace(" ", "").toCharArray()
-        charArr.map {
+        searchString.uppercase().replace(" ", "").map {
             letterFrequency.put(it, letterFrequency.getOrElse(it) { 0 } + 1)
         }
         return letterFrequency
@@ -25,7 +24,6 @@ object StringUtils {
      *
      * @return a list of matches
      */
-    fun retrieveSimilarTitles(
-        searchString: String, letterFrequencyTitleMap: Map<Map<Char, Int>, List<String>>
-    ): List<String>  = letterFrequencyTitleMap[findLetterFrequency(searchString)] ?: listOf()
+    fun retrieveSimilarTitles(searchString: String, letterFrequencyTitleMap: Map<Map<Char, Int>,
+            List<String>>) = letterFrequencyTitleMap[findLetterFrequency(searchString)] ?: listOf()
 }

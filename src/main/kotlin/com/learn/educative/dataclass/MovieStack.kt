@@ -4,8 +4,8 @@ import java.util.*
 
 internal  data class MovieStack (
     private val maxSize: Int = 5,
-    val maxRatingStack: Stack<Movie> = Stack<Movie>(),
-    val viewStack: Stack<Movie> = Stack<Movie>()
+    private val maxRatingStack: Stack<Movie> = Stack<Movie>(),
+    private val viewStack: Stack<Movie> = Stack<Movie>()
 ) {
     fun pop(): Movie {
         maxRatingStack.pop()
