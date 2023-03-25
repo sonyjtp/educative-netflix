@@ -1,17 +1,19 @@
 package com.learn.educative.datastructures
+import kotlinx.serialization.Serializable
 import mu.KotlinLogging
 
-internal data class LinkedListNode(
+@Serializable
+internal data class LinkedListNode<T>(
     var key:Int = 0,
-    var value:Int,
+    var value:Int = 0,
     var frequency: Int = 0,
-    var next: LinkedListNode? = null,
-    var prev: LinkedListNode? = null) {
+    var next: LinkedListNode<T>? = null,
+    var prev: LinkedListNode<T>? = null) {
     companion object {
         private val logger = KotlinLogging.logger {}
     }
 
-    fun display(head: LinkedListNode? = this) {
+    fun display(head: LinkedListNode<T>? = this) {
         var temp = head
         logger.debug { "LinkedList chain starting at node ${temp?.value}: " }
         while (temp != null) {

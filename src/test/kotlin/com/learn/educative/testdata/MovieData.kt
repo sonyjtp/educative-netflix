@@ -4,11 +4,11 @@ import com.learn.educative.datastructures.LinkedListNode
 
 object MovieData {
 
-    internal fun createLinkedLisNodes(dataLists: List<List<Int>>): List<LinkedListNode> = dataLists.map {
+    internal  fun <T> createLinkedLisNodes(dataLists: List<List<T>>): List<LinkedListNode<T>> = dataLists.map {
         createLinkedListNodes(it)
     }.flatten()
-    private fun createLinkedListNodes(dataList: List<Int>): List<LinkedListNode>  = dataList.map {
-        LinkedListNode(value = it)
+    private fun <T> createLinkedListNodes(dataList: List<T>): List<LinkedListNode<T>>  = dataList.map {
+        LinkedListNode<T>(value = it as Int)
     }.toList()
 
 }

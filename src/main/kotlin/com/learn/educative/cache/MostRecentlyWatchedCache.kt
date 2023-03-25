@@ -2,6 +2,7 @@ package com.learn.educative.cache
 
 import com.learn.educative.datastructures.DoublyLinkedList
 import com.learn.educative.datastructures.LinkedListNode
+import mu.KotlinLogging
 
 /**
  * Maintain titles in the order of when it was last accessed. The number of movies in cache at a time =`capacity`.
@@ -11,11 +12,13 @@ import com.learn.educative.datastructures.LinkedListNode
  *   moved to the tail. Searching if the most recently watched movie already exists in a `DoublyLinkedList` is
  *   expensive. So we use a `HashMap` to store the pointers to it.
  */
-internal class MostRecentlyWatchedCache(private var capacity: Int) {
+internal class MostRecentlyWatchedCache<T>(private var capacity: Int) {
+    private val logger = KotlinLogging.logger(this::class.java.name)
+
     /** Holds the keys of recently watched movies */
-    private var keys = HashMap<Int, LinkedListNode>(capacity)
+    private var keys = HashMap<Int, LinkedListNode<T>>(capacity)
     /** Holds the order of recently watched movies */
-    private var cachedNodes: DoublyLinkedList = DoublyLinkedList()
+    private var cachedNodes: DoublyLinkedList<T> = DoublyLinkedList()
 
     /**
      * To get the key from `cache`
@@ -25,7 +28,8 @@ internal class MostRecentlyWatchedCache(private var capacity: Int) {
      * @return `null` if the node does not exist in `cache`. If it does, removes the node from its current
      *  position and moves it to the tail.
      */
-    fun get(key: Int): LinkedListNode? {
+    fun get(key: Int): LinkedListNode<T>? {
+        logger.debug { "Retrieving key=$key" }
         return keys[key]?.let { node ->
             val value = node.value
             cachedNodes.let {
@@ -45,6 +49,7 @@ internal class MostRecentlyWatchedCache(private var capacity: Int) {
      * @param value Value of the node
      */
     fun set(key: Int, value: Int) {
+        logger.debug { "Setting key=$key into the cache" }
         keys[key]?.let {
             cachedNodes.remove(it)
         }?:run {

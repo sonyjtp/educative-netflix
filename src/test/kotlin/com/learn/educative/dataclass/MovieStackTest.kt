@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 
 class MovieStackTest : FunSpec({
 
-    test("pop") {
+    test("push and pop") {
         val movieStack = MovieStack(5)
         val movie1 = Movie(1, "Kumbalangi Nights", 8.5)
         val movie2 = Movie(2, "Sandesham", 9.0)

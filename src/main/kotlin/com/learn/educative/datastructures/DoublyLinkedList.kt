@@ -1,12 +1,16 @@
 package com.learn.educative.datastructures
 
-internal class DoublyLinkedList(
-    var head: LinkedListNode? = null,
-    var tail: LinkedListNode? = null,
+import mu.KotlinLogging
+
+internal class DoublyLinkedList<T>(
+    var head: LinkedListNode<T>? = null,
+    var tail: LinkedListNode<T>? = null,
     var size: Int = 0
 ) {
+    private val logger = KotlinLogging.logger(this::class.java.name)
+
     fun insertAtHead(key: Int, data: Int) {
-        val node = LinkedListNode(key, data)
+        val node = LinkedListNode<T>(key, data)
         head?.apply {
             node.next = this
             this.prev = node
@@ -21,7 +25,7 @@ internal class DoublyLinkedList(
      *
      * @param node The `LinkedListNode` to be added
      */
-    fun append(node: LinkedListNode) {
+    fun append(node: LinkedListNode<T>) {
         node.next = null
         node.prev = null
         if (head == null) {
@@ -41,7 +45,8 @@ internal class DoublyLinkedList(
      * @param value Value of the node
      */
     fun insertAtTail(key: Int, value: Int) {
-        val node = LinkedListNode(key, value)
+        logger.info { "Adding new key-value=$key:$value" }
+        val node = LinkedListNode<T>(key, value)
         tail?.apply {
             node.prev = this
             this.next = node
@@ -65,7 +70,8 @@ internal class DoublyLinkedList(
      *
      * @return the removed node
      */
-    fun remove(node: LinkedListNode?): LinkedListNode? {
+    fun remove(node: LinkedListNode<T>?): LinkedListNode<T>? {
+        logger.debug { "Removing node with key=${node?.key}" }
         node?.let {
             it.prev?.let { prev -> prev.next = it.next } ?: run { head = node.next }
             it.next?.let { next -> next.prev = it.prev } ?: run { tail = node.prev }
@@ -75,7 +81,6 @@ internal class DoublyLinkedList(
             node.next = null
             node.prev = null
         }
-
         return node
     }
 
@@ -90,7 +95,7 @@ internal class DoublyLinkedList(
     /**
      * Removes the head
      */
-    fun removeHead(): LinkedListNode? = remove(head)
+    fun removeHead(): LinkedListNode<T>? = remove(head)
 
     fun removeTail() = remove(tail)
     override fun toString(): String {

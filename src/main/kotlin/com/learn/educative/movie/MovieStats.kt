@@ -5,10 +5,11 @@ import com.learn.educative.datastructures.LinkedListNode
 import com.learn.educative.util.NodeUtils
 
 
-internal class MovieStats {
+internal object MovieStats {
     private var allAges = IntPriorityQueue()
 
-    fun fetchTopMovies(topMoviesByCountries: List<LinkedListNode>) = NodeUtils.findRootNodeByData(topMoviesByCountries)
+    fun fetchTopMovies(topMoviesByCountries: List<LinkedListNode<Int>>) = NodeUtils.findRootNodeByData(
+        topMoviesByCountries)
 
     fun findMedianAge(ages: List<Int>): Double {
         for (age in ages) {

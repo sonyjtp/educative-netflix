@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.8.10"
+    kotlin("plugin.serialization") version "1.8.10"
     id("io.kotest.multiplatform") version "5.5.5"
     id("com.github.spotbugs") version "5.0.13"
     application
@@ -81,7 +82,8 @@ application {
 
 fun setJacocoClasses(classDirectories: ConfigurableFileCollection) {
     val jacocoExcludes = listOf(
-//        "**/com/learn/educative/dataclass/**",
+        "**/com/learn/educative/dataclass/**",
+        "**/com/learn/educative/datastructures/**",
         "**/com/learn/educative/Main*"
     )
     classDirectories.setFrom(

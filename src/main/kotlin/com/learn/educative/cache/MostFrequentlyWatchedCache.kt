@@ -2,19 +2,23 @@ package com.learn.educative.cache
 
 import com.learn.educative.datastructures.DoublyLinkedList
 import com.learn.educative.datastructures.LinkedListNode
+import mu.KotlinLogging
 
 /**
  * Maintains a `DoublyLinkedList` of size = `capacity` of movies that were most frequently watched, with the most
  * watched movie at the tail
  */
-internal class MostFrequentlyWatchedCache(private var capacity: Int) {
+internal class MostFrequentlyWatchedCache<T>(private var capacity: Int) {
+    private val logger = KotlinLogging.logger(this::class.java.name)
+
     private var size = 0
     private var minFrequency = 0
     /** Maps a unique key (node's key) to each movie node */
-    private var keyMap  = HashMap<Int, LinkedListNode>(capacity)
+    private var keyMap  = HashMap<Int, LinkedListNode<T>>(capacity)
     /** Holds the top n (n = `capacity`) most frequently watched movies. The key is the number of
      * times watched and value is a `DoublyLinkedList` of movies*/
-    private var frequencyCache = HashMap<Int, DoublyLinkedList>(capacity)
+    private var frequencyCache = HashMap<Int, DoublyLinkedList<T>>(capacity)
+
 
     /**
      * To get the key from `cache`
@@ -24,7 +28,8 @@ internal class MostFrequentlyWatchedCache(private var capacity: Int) {
      * @return `null` if the node does not exist in `cache`. If it does, removes the node from its current
      *  position. Increase the frequency of the node by 1 and map it to the key = frequency + 1
      */
-    fun get(key: Int): LinkedListNode? {
+    fun get(key: Int): LinkedListNode<T>? {
+        logger.debug { "Retrieving key=$key" }
         return keyMap[key]?.let {
             val temp = it
             frequencyCache[temp.frequency]?.remove(temp)
@@ -46,6 +51,7 @@ internal class MostFrequentlyWatchedCache(private var capacity: Int) {
      * @param value - value of the node returned by the key
      */
     fun  set(key: Int, value: Int) {
+        logger.debug { "Setting key=$key into the cache" }
         get(key)?.let {
             it.value = value
         } ?: run {

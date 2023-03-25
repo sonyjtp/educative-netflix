@@ -17,5 +17,19 @@
             <Bug pattern="UC_USELESS_OBJECT" />
         </Or>
     </Match>
+    <Match>
+        <Or>
+            <Package name="~com\.learn\.educative\.datastructures.*" />
+            <Package name="~com\.learn\.educative\.dataclass.*" />
+        </Or>
+        <Or>
+            <Bug pattern="NM_CLASS_NAMING_CONVENTION" />
+            <Bug pattern="SE_BAD_FIELD" />
+        </Or>
+    </Match>
+    <Match>
+        <Package name="~com\.learn\.educative\.datastructures.*" />
+        <Bug pattern="UMAC_UNCALLABLE_METHOD_OF_ANONYMOUS_CLASS" />
+    </Match>
 </FindBugsFilter>
 

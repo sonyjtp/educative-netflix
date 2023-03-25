@@ -19,7 +19,7 @@ class MovieStatsTest : FunSpec({
                 )
         )
         val nodes = mutableListOf<Int>()
-        var nextNode = MovieStats().fetchTopMovies(movieLists)?.next
+        var nextNode = MovieStats.fetchTopMovies(movieLists)?.next
         nextNode?.display()
         while (nextNode != null) {
             nodes.add(nextNode!!.value)
@@ -30,7 +30,7 @@ class MovieStatsTest : FunSpec({
     }
 
     test("findMedianAge") {
-        MovieStats().findMedianAge(listOf(22, 35, 30, 25)) shouldBe 27.5
+        MovieStats.findMedianAge(listOf(22, 35, 30, 25)) shouldBe 27.5
     }
 
     test("isChangingPopularity") {
@@ -38,7 +38,7 @@ class MovieStatsTest : FunSpec({
            row(intArrayOf(1, 2, 2, 3), true),
            row(intArrayOf(4, 5, 6, 3, 4), false),
            row(intArrayOf(8, 8, 7, 6, 5, 4, 4, 1), true)
-        ) { ratings, isChanging -> MovieStats().isChangingPopularity(ratings) shouldBe isChanging }
+        ) { ratings, isChanging -> MovieStats.isChangingPopularity(ratings) shouldBe isChanging }
     }
 
 })

@@ -7,12 +7,12 @@ import io.kotest.matchers.shouldBe
 class MostFrequentlyWatchedCacheTest : FunSpec({
 
     test("addToCache") {
-        val cache = MostFrequentlyWatchedCache(2)
-        val expected1 = LinkedListNode(1, 1, frequency = 1, next = LinkedListNode(2, 2))
+        val cache = MostFrequentlyWatchedCache<Int>(2)
+        val expected1 = LinkedListNode(1, 1, frequency = 1, next = LinkedListNode<Int>(2, 2))
         val expected2 = LinkedListNode(2, 2, frequency = 1, prev = expected1)
-        val expected3 = LinkedListNode(3, 3, 1)
+        val expected3 = LinkedListNode<Int>(3, 3, 1)
         val expected4 = LinkedListNode(4, 4, frequency = 1, prev = expected2)
-        val expected1a = LinkedListNode(1, 1, frequency = 2)
+        val expected1a = LinkedListNode<Int>(1, 1, frequency = 2)
         val expected1b = LinkedListNode(1, 1, frequency = 2, next = expected3)
         val expected2a = LinkedListNode(2, 2, frequency = 1, next = expected4)
         val expected3a = LinkedListNode(3, 3, frequency = 2, prev = expected1)
@@ -23,7 +23,7 @@ class MostFrequentlyWatchedCacheTest : FunSpec({
         cache.get(1)
         cache.set(3, 3)
         cache.toString() shouldBe "MostFrequentlyWatchedCache(keyCache={" +
-                "1=${LinkedListNode(1,1, 2)}, " +
+                "1=${LinkedListNode<Int>(1,1, 2)}, " +
                 "3=$expected3}, " +
                 "frequencyCache={" +
                 "1=DLL(head:$expected3, tail:$expected3, size:1), " +

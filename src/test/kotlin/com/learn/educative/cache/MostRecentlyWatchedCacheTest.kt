@@ -1,13 +1,14 @@
 package com.learn.educative.cache
 
+import com.learn.educative.dataclass.Movie
 import com.learn.educative.datastructures.LinkedListNode
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 class MostRecentlyWatchedCacheTest : FunSpec({
     test("addToCache") {
-        val cache = MostRecentlyWatchedCache(2)
-        val expected1 = LinkedListNode(1, 10)
+        val cache = MostRecentlyWatchedCache<Movie>(2)
+        val expected1 = LinkedListNode<Int>(1, 10)
         val expected2 = LinkedListNode(2, 20, prev = expected1)
         val expected3 = LinkedListNode(3, 30, prev = expected2)
         cache.get(1) shouldBe null
