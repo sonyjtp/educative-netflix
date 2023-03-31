@@ -7,7 +7,7 @@ import java.util.*
 
 @Serializable
 internal  data class MovieStack (
-    private val maxSize: Int = 5,
+//    private val maxSize: Int = 5,
     @Contextual
     private val maxRatingStack: Stack<Movie> = Stack<Movie>(),
     @Contextual

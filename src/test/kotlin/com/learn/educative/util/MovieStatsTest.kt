@@ -1,4 +1,4 @@
-package com.learn.educative.movie
+package com.learn.educative.util
 
 import com.learn.educative.testdata.MovieData
 import io.kotest.core.spec.style.FunSpec

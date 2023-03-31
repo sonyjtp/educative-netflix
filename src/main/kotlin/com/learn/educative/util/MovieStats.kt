@@ -1,8 +1,7 @@
-package com.learn.educative.movie
+package com.learn.educative.util
 
 import com.learn.educative.datastructures.IntPriorityQueue
 import com.learn.educative.datastructures.LinkedListNode
-import com.learn.educative.util.NodeUtils
 
 
 internal object MovieStats {
