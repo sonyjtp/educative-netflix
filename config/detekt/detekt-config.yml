@@ -1,0 +1,7 @@
+style:
+  MagicNumber:
+    active: false
+complexity:
+  NestedBlockDepth:
+    active: true
+    threshold: 5

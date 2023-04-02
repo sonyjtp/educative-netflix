@@ -1,0 +1,6 @@
+micronaut:
+  application:
+    name: educative-netflix
+  server:
+    port: 8080
+    context-path: /educative-netflix

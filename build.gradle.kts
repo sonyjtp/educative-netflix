@@ -1,8 +1,11 @@
 plugins {
-    kotlin("jvm") version "1.8.10"
-    kotlin("plugin.serialization") version "1.8.10"
-    id("io.kotest.multiplatform") version "5.5.5"
     id("com.github.spotbugs") version "5.0.13"
+    id ("io.gitlab.arturbosch.detekt") version "1.22.0"
+    id("io.kotest.multiplatform") version "5.5.5"
+    id("io.micronaut.application") version "3.7.7"
+    kotlin("jvm") version "1.8.10"
+    kotlin("kapt") version "1.8.10"
+    kotlin("plugin.serialization") version "1.8.10"
     application
     jacoco
     checkstyle
@@ -10,6 +13,7 @@ plugins {
 
 val kotestVersion: String by project
 val kotlinVersion: String by project
+val kotestMicronautVersion: String by project
 
 group = "com.learn.educative"
 version = "1.0-SNAPSHOT"
@@ -20,14 +24,22 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    implementation("ch.qos.logback:logback-classic:1.4.6")
 
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    implementation("ch.qos.logback:logback-classic")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+    implementation("io.micronaut:micronaut-http-server-netty")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.kotest:kotest-property:$kotestVersion")
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
+    testImplementation("io.micronaut.test:micronaut-test-junit5:$kotestMicronautVersion")
+    testImplementation("io.micronaut.test:micronaut-test-kotest:$kotestMicronautVersion")
+    testImplementation("io.mockk:mockk:1.13.4")
+
+
 
 }
 
@@ -69,13 +81,30 @@ tasks.spotbugsTest {
     enabled = false
 }
 
+tasks.detektMain.configure {
+    reports {
+        xml.required.set(false)
+        html.required.set(true)
+        txt.required.set(false)
+        html.outputLocation.set(file("build/reports/detekt.html"))
+    }
+}
+
+
 
 kotlin {
-    jvmToolchain(18)
+    jvmToolchain(17)
 }
 
 application {
     mainClass.set("MainKt")
+}
+
+detekt {
+    source = files("src/main/kotlin")
+    parallel = true
+    config = files("config/detekt/detekt-config.yml")
+    buildUponDefaultConfig = true
 }
 
 
