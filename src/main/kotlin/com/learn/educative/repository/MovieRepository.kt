@@ -2,8 +2,10 @@ package com.learn.educative.repository
 
 import com.learn.educative.dataclass.Genre
 import com.learn.educative.dataclass.Movie
+import jakarta.inject.Singleton
 
 
+@Singleton
 internal class MovieRepository {
 
     //temporary
@@ -49,5 +51,7 @@ internal class MovieRepository {
             Genre.UNKNOWN -> listOf()
         }
     }
+
+    fun getMovieById(id: Int) = movieMap[id]
 
 }

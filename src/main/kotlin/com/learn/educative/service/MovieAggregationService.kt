@@ -9,34 +9,40 @@ import jakarta.inject.Singleton
 internal class MovieAggregationService {
 
     private val movieRepository = MovieRepository()
-    private var movieMapCache:  Map<Genre, List<Movie?>>? = null // thread unsafe
+    @Volatile
+    private var movieMapCache:  Map<Genre, List<Movie?>>? = null
 
     fun buildGenreCombinations(genres: List<Genre>): List<String> {
         movieMapCache = getMovieMap()
         val combinations = mutableListOf<String>()
         if (genres.isNotEmpty()) {
-            combinations.addAll(backTrack(0, combinations, mutableListOf(), genres))
+            buildCombinations(0, combinations, mutableListOf(), genres)
             movieMapCache = null
         }
         return combinations
     }
 
     /**
-     * Function to generate all combinations of movies of a genre
+     * Recursive function to generate all combinations of movies of a genre
+     *
+     * @param index index of the genre in the genre list
+     * @param combinations combinations of movies
+     * @param path number of movies in a combination
      */
-    private fun backTrack(index: Int, combinations: MutableList<String>, path: MutableList<String>, genres: List<Genre>): List<String> {
+    private fun buildCombinations(index: Int, combinations: MutableList<String>, path: MutableList<String>,
+                                  genres: List<Genre>){
         if (path.size == genres.size) {
             combinations.add(path.joinToString(""))
+            return
         } else {
             movieMapCache?.get(genres[index])?.let { movies ->
                 for (movie in movies) {
                     path.add("$movie;")
-                    backTrack(index + 1, combinations,  path, genres)
+                    buildCombinations(index + 1, combinations,  path, genres)
                     if (path.size > 0) path.removeAt(path.size - 1)
                 }
             }
         }
-        return combinations
     }
 
     private fun getMovieMap() = movieRepository.mapMoviesByGenre()
