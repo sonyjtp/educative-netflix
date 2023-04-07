@@ -93,7 +93,7 @@ tasks.detektMain.configure {
 
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(18)
 }
 
 application {

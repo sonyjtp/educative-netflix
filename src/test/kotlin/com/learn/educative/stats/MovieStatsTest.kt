@@ -1,4 +1,4 @@
-package com.learn.educative.util
+package com.learn.educative.stats
 
 import com.learn.educative.testdata.MovieData
 import io.kotest.core.spec.style.FunSpec
@@ -27,10 +27,6 @@ class MovieStatsTest : FunSpec({
         }
         nodes.joinToString("") shouldBe "1233557899101011"
 
-    }
-
-    test("findMedianAge") {
-        MovieStats.findMedianAge(listOf(22, 35, 30, 25)) shouldBe 27.5
     }
 
     test("isChangingPopularity") {

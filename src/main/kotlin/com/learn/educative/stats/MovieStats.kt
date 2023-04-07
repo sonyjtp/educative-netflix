@@ -1,21 +1,14 @@
-package com.learn.educative.util
+package com.learn.educative.stats
 
-import com.learn.educative.datastructures.IntPriorityQueue
 import com.learn.educative.datastructures.LinkedListNode
+import com.learn.educative.util.NodeUtils
 
 
 internal object MovieStats {
-    private var allAges = IntPriorityQueue()
 
     fun fetchTopMovies(topMoviesByCountries: List<LinkedListNode<Int>>) = NodeUtils.findRootNodeByData(
-        topMoviesByCountries)
-
-    fun findMedianAge(ages: List<Int>): Double {
-        for (age in ages) {
-            allAges.insert(age)
-        }
-        return allAges.findMedian()
-    }
+        topMoviesByCountries
+    )
 
     fun isChangingPopularity(ratings: IntArray): Boolean {
         var (inc, dec) = listOf(true, true)

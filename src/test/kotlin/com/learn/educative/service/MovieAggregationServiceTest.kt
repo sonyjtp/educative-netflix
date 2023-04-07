@@ -11,7 +11,7 @@ class MovieAggregationServiceTest : FunSpec({
 
     lateinit var movieAggregationService: MovieAggregationService
 
-    beforeTest {
+    beforeSpec {
         movieAggregationService = MovieAggregationService()
     }
 
