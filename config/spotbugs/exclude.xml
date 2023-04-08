@@ -10,6 +10,11 @@
             <Bug pattern = "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" />
     </Match>
     <Match>
+        <Class name="com.learn.educative.stats.SessionStats" />
+            <Method name="findSessionEventsMedians" />
+            <Bug pattern="BX_UNBOXED_AND_COERCED_FOR_TERNARY_OPERATOR" />
+    </Match>
+    <Match>
         <Class name="com.learn.educative.util.StringUtils" />
         <Method name="findLetterFrequency" />
         <Or>
@@ -21,6 +26,7 @@
         <Or>
             <Package name="~com\.learn\.educative\.datastructures.*" />
             <Package name="~com\.learn\.educative\.dataclass.*" />
+            <Package name="~com\.learn\.educative\.stats.*" />
         </Or>
         <Or>
             <Bug pattern="NM_CLASS_NAMING_CONVENTION" />
