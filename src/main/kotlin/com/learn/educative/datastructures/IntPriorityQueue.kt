@@ -3,8 +3,8 @@ package com.learn.educative.datastructures
 import java.util.*
 
 internal class IntPriorityQueue {
-    private var firstHalf = PriorityQueue { a: Int, b: Int -> b - a }
-    private var secondHalf = PriorityQueue { a: Int, b: Int -> a - b }
+    private val firstHalf = PriorityQueue { a: Int, b: Int -> b - a }
+    private val secondHalf = PriorityQueue { a: Int, b: Int -> a - b }
 
     fun insert(num: Int) {
         if (firstHalf.isEmpty() || firstHalf.peek() > num) firstHalf.offer(num) else secondHalf.offer(num)
