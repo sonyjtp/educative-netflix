@@ -21,6 +21,8 @@ internal object MovieData {
         return combinations
     }
 
+    fun getMovieList(ids: List<Int>) = ids.map { getMovieById(it)!! }.toList()
+
     private fun <T> createLinkedListNodes(dataList: List<T>): List<LinkedListNode<T>>  = dataList.map {
         LinkedListNode<T>(value = it as Int)
     }.toList()

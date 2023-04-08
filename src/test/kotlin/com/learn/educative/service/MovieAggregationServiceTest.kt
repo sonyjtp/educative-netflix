@@ -36,6 +36,11 @@ class MovieAggregationServiceTest : FunSpec({
         }
     }
 
+    test("buildMarathonCombinations") {
+        val movies = MovieData.getMovieList(listOf(1, 2, 3))
+        println(movieAggregationService.buildMovieMarathon(movies))
+    }
+
 
     test("getMovieMap") { }
 })

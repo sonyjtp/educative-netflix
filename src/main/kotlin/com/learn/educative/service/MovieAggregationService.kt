@@ -4,9 +4,10 @@ import com.learn.educative.dataclass.Genre
 import com.learn.educative.dataclass.Movie
 import com.learn.educative.repository.MovieRepository
 import jakarta.inject.Singleton
+import java.util.*
 
 @Singleton
-internal class MovieAggregationService {
+class MovieAggregationService {
 
     private val movieRepository = MovieRepository()
     @Volatile
@@ -20,6 +21,12 @@ internal class MovieAggregationService {
             movieMapCache = null
         }
         return combinations
+    }
+
+    fun buildMovieMarathon(movies: List<Movie>): List<List<Movie>> {
+        val marathonList: MutableList<List<Movie>> = LinkedList()
+        buildMarathonCombinations(0, movies.size, movies, marathonList)
+        return marathonList
     }
 
     /**
@@ -42,6 +49,16 @@ internal class MovieAggregationService {
                     if (path.size > 0) path.removeAt(path.size - 1)
                 }
             }
+        }
+    }
+
+    private fun buildMarathonCombinations(first: Int, size: Int, movieList: List<Movie>,
+                                          combinations: MutableList<List<Movie>>) {
+        if (first == size) combinations.add(movieList)
+        for (i in first until  size) {
+            Collections.swap(movieList, first, i)
+            buildMarathonCombinations(first + 1, size, movieList, combinations)
+            Collections.swap(movieList, first, i)
         }
     }
 
