@@ -44,7 +44,7 @@ internal class SessionStats {
     }
 
     private fun moveToOtherQueue(sessionWindow: SessionWindow) {
-        for (i in 0 until sessionWindow.windowSize.floorDiv(2)) {
+        for (i in 0 until sessionWindow.windowSize / 2) {
             sessionWindow.maxQueue.add(sessionWindow.minQueue.peek())
             sessionWindow.minQueue.poll()
         }
@@ -83,11 +83,9 @@ internal class SessionStats {
     }
 
     private fun removeFromQueue(nums: MutableMap<Int, Int>, queue: PriorityQueue<Int>) {
-        nums[queue.peek()]?.let {
-            while (queue.isNotEmpty() && it > 0) {
-                nums[queue.peek()] = it - 1
-                queue.poll()
-            }
+        while (queue.isNotEmpty() && nums.getOrDefault(queue.peek(), -1) > 0) {
+            nums[queue.peek()] = nums[queue.peek()]!! - 1
+            queue.poll()
         }
     }
 }
